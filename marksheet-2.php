@@ -1,3 +1,24 @@
+<?php
+  $grade="";
+  $total = $_POST['marathi']+$_POST['automotive']+$_POST['english']+$_POST['maths']+$_POST['science']+$_POST['social'];
+  $percentage = $total/600*100;
+  if($percentage>=35){
+    $result = "Pass";
+  }
+  else{
+    $result = "Fail";
+  }
+  if($percentage>=65 && $percentage<=70){
+    $grade="C";
+  }
+  else if($percentage>=75 && $percentage<=80){
+    $grade="B";
+  }
+  else if($percentage>=85 && $percentage<=100){
+    $grade="A";
+  }
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,13 +107,19 @@
           <td>A</td>
           <td></td>
         </tr>
+        <tr>
+          <th>Grade</th>
+          <td>*</td>
+          <td><?php echo $grade; ?></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
 
     <div class="summary">
-      <p><strong>Total Marks:</strong> <?php echo $_POST['total'] ?></p>
-      <p><strong>Percentage:</strong> <?php echo $_POST['percentage'] ?>%</p>
-      <p><strong>Result:</strong> <?php echo $_POST['result'] ?> </p>
+      <p><strong>Total Marks:</strong> <?php echo $total ?></p>
+      <p><strong>Percentage:</strong> <?php echo $percentage ?>%</p>
+      <p><strong>Result:</strong> <?php echo $result ?> </p>
     </div>
 
     <div class="signature">
@@ -101,6 +128,9 @@
       <p>3221449065421</p>
     </div>
   </div>
+  <center>
+    <button onclick="window.print()">Print</button>
+  </center>
 </body>
 
 </html>

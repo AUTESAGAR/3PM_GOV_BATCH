@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Create Marksheet</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -66,12 +59,9 @@
       background: #87104b;
     }
   </style>
-</head>
-
-<body>
 
   <h2>Create SSC Marksheet</h2>
-  <form action="marksheet.php" method="POST">
+  <form action="marksheet-2.php" method="POST">
     <label>Seat Number</label>
     <input type="text" name="seat_no">
     <label>Center Number</label>
@@ -86,8 +76,6 @@
     <input type="text" name="student_name">
     <label>Mother's Name</label>
     <input type="text" name="mother_name">
-
-
     <label>Marathi Marks</label>
     <input type="number" name="marathi" id="marathi" max="100" min="0">
     <label>Automotive Service Technician Marks</label>
@@ -105,51 +93,6 @@
     <label>Defence Studies Grade</label>
     <input type="text" name="defence" maxlength="1" value="A">
     <label>Self Development & Art Apprn. Grade</label>
-    <input type="text" name="art" maxlength="1" value="A">
-    <label>Percentage</label>
-    <input type="text" name="percentage" id="percentage" readonly>
-    <label>Total Marks</label>
-    <input type="text" name="total" id="total_marks" readonly>
-    <label>Result</label>
-    <input type="text" name="result" id="result" readonly>
-
+    <input type="text" name="art" maxlength="1" value="A">    
     <button type="submit">Generate Marksheet</button>
   </form>
-  <script>
-    var marathi, automotive, english, maths, science, social, total;
-    document.getElementById("marathi").addEventListener("change", function() {
-      marathi = Number(this.value);
-      console.log(marathi)
-      document.getElementById("automotive").addEventListener("change", function() {
-        automotive = Number(this.value) + marathi;
-        console.log(automotive)
-        document.getElementById("english").addEventListener("change", function() {
-          english = Number(this.value) + automotive;
-          console.log(english)
-          document.getElementById("maths").addEventListener("change", function() {
-            maths = Number(this.value) + english;
-            console.log(maths)
-            document.getElementById("science").addEventListener("change", function() {
-              science = Number(this.value) + maths;
-              console.log(social)
-              document.getElementById("social").addEventListener("change", function() {
-                total = Number(this.value) + science;                
-                document.getElementById("total_marks").value=total;
-                let percentage = total / 600 * 100;
-                document.getElementById("percentage").value=percentage;
-                if(percentage>=35){
-                  document.getElementById("result").value="Pass";
-                }
-                else{
-                  document.getElementById("result").value="Fail";
-                }
-              })
-            })
-          })
-        })
-      })
-    })
-  </script>
-</body>
-
-</html>
