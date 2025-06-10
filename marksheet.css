@@ -1,0 +1,52 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f2f2;
+  padding: 20px;
+}
+
+.marksheet {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border: 4px solid #d63e8c;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+h1, h2, h3 {
+  text-align: center;
+  margin: 5px 0;
+  color: #a11858;
+}
+
+.details {
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table, th, td {
+  border: 1px solid #ccc;
+}
+
+th, td {
+  padding: 8px;
+  text-align: center;
+}
+
+.summary {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.signature {
+  margin-top: 30px;
+  text-align: right;
+  font-weight: bold;
+}
