@@ -7,7 +7,7 @@
         <button class="btn btn-info" id="login">User Login</button>
         <button class="btn btn-info" id="reg">Create Account</button>
     </div>
-    
+
     <main id="result" class="container-fluid bg-light"></main>
 
     <script>
@@ -38,7 +38,7 @@
                         $("#result").html(res);
                     }
                 })
-            })
+            })            
             $("#reg").on("click",function(){
                 $.ajax({
                     url:"reg.php",
