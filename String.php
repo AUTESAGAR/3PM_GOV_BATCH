@@ -73,4 +73,9 @@
 //   echo stripslashes($add);
   $r = addcslashes($name,"A..z"); // in the Range of A-Z Apply Slashesh
   echo $r;
+
+
+  $text = "1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
+  $token = substr(str_shuffle($text),1,12);
+  setcookie('token',$token,time()+3600);
 ?>
