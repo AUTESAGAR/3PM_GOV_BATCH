@@ -1,5 +1,5 @@
-<?php session_start(); ?>
-<?php
+<?php 
+    session_start();
     if($_COOKIE['PHPSESSID'] && $_SESSION['uname']==""){
         header("Location:session_reg.php");
     }    
