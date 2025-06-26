@@ -18,7 +18,7 @@
         $query = "INSERT INTO `products` VALUES('','$pro_name','$folder')";
         $run = mysqli_query($conn,$query);
         if($run){
-            header("read.php");
+            header("Location:read.php");
         }
         else{
             echo "Check Db Connection";
