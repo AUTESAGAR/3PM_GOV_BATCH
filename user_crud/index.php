@@ -1,60 +1,36 @@
-<style>    
-    .main{
-        border: 2px solid;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        padding: 10px;
-    }
-    .user{
-        border: 2px solid;
-        height: auto;
-        width: 250px;
-        text-align: center;
-        font-size: 20px;
-        font-weight: bold;
-    }
-    button{
-        height: 30px;
-        width: 90px;        
-    }
-    .delete{
-        background-color: rgb(211, 43, 43);
-    }
-    .edit{
-        background-color: rgb(3, 157, 3);
-    }
-    .create{
-        background-color: rgb(255, 141, 1);
-        line-height: 30px;
-        margin: 10px auto;
-        width: 150px;
-        text-align: center;
-    }
-</style>
-
-<?php
+<?php 
+    session_start();
     $conn = mysqli_connect("localhost","root","","3pm");
-    $query="SELECT * FROM `users`";
-    $run = mysqli_query($conn,$query);       
+    $id = $_SESSION['id'];
+    $query = "SELECT * FROM `users` WHERE `id`='$id'";
+    $run = mysqli_query($conn,$query);
+    $data = mysqli_fetch_assoc($run);
+
+    if(isset($_POST['logout'])){
+        $id= $_POST['id'];
+        $query="UPDATE `users` SET `logs`='' WHERE `id`='$id'";
+        mysqli_query($conn,$query);
+        session_destroy();
+        header("Location:index.php");
+    }        
+    if(empty($_SESSION['id'])===empty($data['logs'])){
+        // header("Location:login.php");
+    }
 ?>
 
-<a href="create.php"><p class="create">Add New User</p></a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+</head>
+<body>
+    <h1>Welcome, <?php echo $data['name']; ?></h1>
 
-
-
-<div class="main">
-    <?php while($data = mysqli_fetch_assoc($run)){ ?>
-        <div class="user">
-            <p><img src="<?php echo $data['photo'] ?>" alt="user" height="80px"></p>
-            <p><?php echo $data['name'] ?></p>
-            <p><?php echo $data['uname'] ?></p>
-            <p><?php echo $data['email'] ?></p>
-            <p><?php echo $data['mobile'] ?></p>
-            <p>
-                <a href="update.php?id=<?php echo $data['id'] ?>"><button class="edit">Edit</button></a>
-                <a href="delete.php?id=<?php echo $data['id'] ?>"><button class="delete">Delete</button></a>
-            </p>            
-        </div>
-    <?php } ?>
-</div>
+    <form action="" method="post">
+        <input type="hidden" name="id" id="id" value="<?php echo $data['id']; ?>">
+        <button name="logout">Logout</button>
+    </form>
+</body>
+</html>

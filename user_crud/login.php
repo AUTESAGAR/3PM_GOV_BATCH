@@ -1,5 +1,11 @@
 <?php
-    error_reporting(0);
+    // error_reporting(0);
+    session_start();
+    
+    if($_SESSION['id']){
+        header("Location:index.php");
+    }
+
     $r = "";
     $conn = mysqli_connect("localhost","root","","3pm");
     if(isset($_POST['login']) && $_POST['uname'] && $_POST['pwd'])
@@ -17,9 +23,12 @@
         }
         else{
             $r = "Login Success";
+            $update_id = $_SESSION['id'] = $data['id'];
+            $query="UPDATE `users` SET `logs`='$update_id' WHERE `id`='$update_id'";
+            mysqli_query($conn,$query);
             header("refresh:1,url=index.php");
         }
-    }
+    }    
 ?>
 <center>
     <form action="" method="post">
