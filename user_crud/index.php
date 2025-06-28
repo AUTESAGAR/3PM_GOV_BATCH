@@ -1,4 +1,4 @@
-<style>
+<style>    
     .main{
         border: 2px solid;
         display: flex;
@@ -24,6 +24,13 @@
     .edit{
         background-color: rgb(3, 157, 3);
     }
+    .create{
+        background-color: rgb(255, 141, 1);
+        line-height: 30px;
+        margin: 10px auto;
+        width: 150px;
+        text-align: center;
+    }
 </style>
 
 <?php
@@ -31,6 +38,10 @@
     $query="SELECT * FROM `users`";
     $run = mysqli_query($conn,$query);       
 ?>
+
+<a href="create.php"><p class="create">Add New User</p></a>
+
+
 
 <div class="main">
     <?php while($data = mysqli_fetch_assoc($run)){ ?>

@@ -3,18 +3,36 @@
     $id = $_GET['id'];
     $query = "SELECT * FROM `users` WHERE `id`='$id'";
     $run = mysqli_query($conn,$query);
-    $data = mysqli_fetch_assoc($run);
+    $data = mysqli_fetch_assoc($run);    
 
-    if(isset($_POST['update'])){
+    if(isset($_POST['update']) && $_FILES['photo']['name']){
+        $name = $_POST['name'];
+        $uname = $_POST['uname'];
+        $email = $_POST['email'];
+        $mobile = $_POST['mobile'];
+        if(file_exists($data['photo'])){
+            if(unlink($data['photo'])){
+                $photo = $_FILES['photo']['name'];
+                $tmp = $_FILES['photo']['tmp_name'];
+                $folder = "./uploads/".time()."_".$photo;
+                move_uploaded_file($tmp,$folder);
+                $query="UPDATE `users` SET `name`='$name',`uname`='$uname',`email`='$email',`mobile`='$mobile',`photo`='$folder' WHERE `id`='$id'";
+                $run = mysqli_query($conn,$query);
+                if($run){
+                    header("Location:index.php");
+                }
+                else{
+                    header("Location:update.php");
+                }
+            }
+        }
+    }
+    else if(isset($_POST['update'])){
         $name = $_POST['name'];
         $uname = $_POST['uname'];        
         $email = $_POST['email'];
-        $mobile = $_POST['mobile'];
-        $photo = $_FILES['photo']['name'];
-        $tmp = $_FILES['photo']['tmp_name'];
-        $folder = "./uploads/".time()."_".$photo;
-        move_uploaded_file($tmp,$folder);
-        $query="UPDATE `users` SET `name`='$name',`uname`='$uname',`email`='$email',`mobile`='$mobile',`photo`='$folder' WHERE `id`='$id'";
+        $mobile = $_POST['mobile'];        
+        $query="UPDATE `users` SET `name`='$name',`uname`='$uname',`email`='$email',`mobile`='$mobile' WHERE `id`='$id'";
         $run = mysqli_query($conn,$query);
         if($run){
             header("Location:index.php");
@@ -23,6 +41,9 @@
             header("Location:update.php");
         }
     }
+    else{
+        $r = "All Fields Are Required";
+    }    
 ?>
 <center>
     <form action="" method="post" enctype="multipart/form-data">
@@ -33,6 +54,7 @@
         <p><input type="text" value="<?php echo $data['mobile']; ?>" name="mobile" id="mobile" placeholder="Enter Enter Your mobile"></p>
         <p><img src="<?php echo $data['photo']; ?>" alt="" height="80px"></p>
         <p><input type="file" name="photo" id="photo"></p>
+        <p><?php echo $r; ?></p>
         <p><input type="submit" name="update" id="submit" value="Update"></p>
     </form>
 </center>
