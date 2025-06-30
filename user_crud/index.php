@@ -11,7 +11,7 @@
         $query="UPDATE `users` SET `logs`='' WHERE `id`='$id'";
         mysqli_query($conn,$query);
         session_destroy();
-        header("Location:index.php");
+        header("Location:login.php");
     }        
     if(empty($_SESSION['id'])===empty($data['logs'])){
         // header("Location:login.php");
