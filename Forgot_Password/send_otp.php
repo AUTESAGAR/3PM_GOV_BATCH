@@ -1,9 +1,10 @@
 <?php
+    session_start();
     $conn = mysqli_connect("localhost","root","","3pm");
-
     $text = "123456789987654321123456789987654321";
     $otp = substr(str_shuffle($text),0,6);
     $email = $_POST['email'];
+    $_SESSION['otp']=$otp;
     $query = "UPDATE `users` SET `otp`='$otp' WHERE `email` = '$email'";
     $run = mysqli_query($conn,$query);
 
@@ -33,7 +34,7 @@
     
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = "<b>One Time Password</b>";
+    $mail->Subject = "One Time Password";
     $mail->Body    = "OTP : <mark>". $otp ."</mark>";
     $mail->AltBody = 'VIT Trading Services';
 
